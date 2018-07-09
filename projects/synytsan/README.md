@@ -1,1 +1,1 @@
-synytsan -- Anton Synytsia
+This is my assignment-2 submission!
