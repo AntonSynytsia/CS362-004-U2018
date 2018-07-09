@@ -653,15 +653,15 @@ int smithyEffect(int currentPlayer, struct gameState *state, int handPos) {
     }
 
   //discard card from hand
-  discardCard(handPos, currentPlayer, state, 0);
+  discardCard(currentPlayer, handPos, state, 0);
   return 0;
 }
 
 int adventurerEffect(int currentPlayer, struct gameState *state) {
-  int temphand[MAX_HAND];// moved above the if statement
-  int drawntreasure=0;
+  int temphand[MAX_HAND];
+  int drawntreasure = 0;
   int cardDrawn;
-  int z = 0;// this is the counter for the temp hand
+  int z = 0; // this is the counter for the temp hand
 
   while(drawntreasure<2){
     if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
@@ -679,7 +679,7 @@ int adventurerEffect(int currentPlayer, struct gameState *state) {
   }
   while(z-1>=0){
     state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
-    z=z-1;
+    ++z;
   }
   return 0;
 }
@@ -699,10 +699,7 @@ int councilRoomEffect(int currentPlayer, struct gameState *state, int handPos) {
   //Each other player draws a card
   for (i = 0; i < state->numPlayers; i++)
     {
-      if ( i != currentPlayer )
-        {
-          drawCard(i, state);
-        }
+      drawCard(i, state);
     }
 
   //put played card in played card pile
@@ -741,8 +738,8 @@ int baronEffect(int currentPlayer, struct gameState *state, int handPos, int cho
         for (;p < state->handCount[currentPlayer]; p++){
           state->hand[currentPlayer][p] = state->hand[currentPlayer][p+1];
         }
-        state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
         state->handCount[currentPlayer]--;
+        state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
         card_not_discarded = 0;//Exit the loop
       }
       else if (p > state->handCount[currentPlayer]){
