@@ -42,29 +42,28 @@ unittests: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o test_helpe
 	echo "Result for running four units tests:" > unittestresults.out
 
 	echo "unittest1.c:" >> unittestresults.out
-	gcc -o unittest1 dominion.c rngs.c unittest1.c $(CFLAGS)
+	gcc -o unittest1 dominion.c rngs.c test_helpers.c unittest1.c $(CFLAGS)
 	unittest1 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
 	echo "unittest2.c:" >> unittestresults.out
-	gcc -o unittest2 dominion.c rngs.c unittest2.c $(CFLAGS)
+	gcc -o unittest2 dominion.c rngs.c test_helpers.c unittest2.c $(CFLAGS)
 	unittest2 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
-
+	
 	echo "unittest3.c:" >> unittestresults.out
-	gcc -o unittest3 dominion.c rngs.c unittest3.c $(CFLAGS)
+	gcc -o unittest3 dominion.c rngs.c test_helpers.c unittest3.c $(CFLAGS)
 	unittest3 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
-
+	
 	echo "unittest4.c:" >> unittestresults.out
-	gcc -o unittest4 dominion.c rngs.c unittest4.c $(CFLAGS)
+	gcc -o unittest4 dominion.c rngs.c test_helpers.c unittest4.c $(CFLAGS)
 	unittest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
 
 cardtests: cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o
-
-	echo "Result for running four units tests:" > unittestresults.out
+	echo "Result for running four card tests:" > unittestresults.out
 
 	echo "cardtest1.c:" >> unittestresults.out
 	gcc -o cardtest1 dominion.c rngs.c cardtest1.c $(CFLAGS)
@@ -87,7 +86,7 @@ cardtests: cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o
 	gcov dominion.c >> unittestresults.out
 
 
-unittestresults: unittests cardtests
+unittestresults: unittests
 
 
 all: playdom player unittestresults
@@ -95,4 +94,5 @@ all: playdom player unittestresults
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
-	rm unittestresults.out unittest1
+	rm -f unittest1.exe unittest1 unittest2.exe unittest2 unittest3.exe unittest3 unittest4.exe unittest4
+	rm -f cardtest1.exe cardtest1 cardtest2.exe cardtest2 cardtest3.exe cardtest3 cardtest4.exe cardtest4

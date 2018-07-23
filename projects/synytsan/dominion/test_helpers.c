@@ -3,11 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void custom_assert(int v_res, int v_exp, const char* success_msg, onst char* failure_msg) {
+int custom_assert(int v_res, int v_exp, const char* msg) {
     if (v_res == v_exp) {
-        printf("SUCCESS: %s", success_msg);
+        printf("SUCCESS: %s\n", msg);
+        return 1;
     }
     else {
-        printf("FAILURE: %s", failure_msg);
+        printf("FAILURE: %s\n", msg);
+        return 0;
     }
 }
