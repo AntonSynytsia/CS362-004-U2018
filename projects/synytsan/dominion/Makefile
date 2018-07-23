@@ -45,21 +45,25 @@ unittests: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o test_helpe
 	gcc -o unittest1 dominion.c rngs.c test_helpers.c unittest1.c $(CFLAGS)
 	unittest1 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
 
 	echo "unittest2.c:" >> unittestresults.out
 	gcc -o unittest2 dominion.c rngs.c test_helpers.c unittest2.c $(CFLAGS)
 	unittest2 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
 
 	echo "unittest3.c:" >> unittestresults.out
 	gcc -o unittest3 dominion.c rngs.c test_helpers.c unittest3.c $(CFLAGS)
 	unittest3 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
 
 	echo "unittest4.c:" >> unittestresults.out
 	gcc -o unittest4 dominion.c rngs.c test_helpers.c unittest4.c $(CFLAGS)
 	unittest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
 
 
 cardtests: cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o
@@ -69,21 +73,25 @@ cardtests: cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o
 	gcc -o cardtest1 dominion.c rngs.c test_helpers.c cardtest1.c $(CFLAGS)
 	cardtest1 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
 
 	echo "cardtest2.c:" >> unittestresults.out
 	gcc -o cardtest2 dominion.c rngs.c test_helpers.c cardtest2.c $(CFLAGS)
 	cardtest2 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
 
 	echo "cardtest3.c:" >> unittestresults.out
 	gcc -o cardtest3 dominion.c rngs.c test_helpers.c cardtest3.c $(CFLAGS)
 	cardtest3 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
 
 	echo "cardtest4.c:" >> unittestresults.out
 	gcc -o cardtest4 dominion.c rngs.c test_helpers.c cardtest4.c $(CFLAGS)
 	cardtest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
 
 
 unittestresults: unittests cardtests
