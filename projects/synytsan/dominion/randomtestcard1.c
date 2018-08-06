@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 {
     int num_players, seed;
 
-    int i, j, n, v, k1, k2, k3, e1, e2, e3;
+    int i, j, n, k1, k2, k3, e1, e2, e3;
 
     int num_success = 0;
     int num_tests = 0;
