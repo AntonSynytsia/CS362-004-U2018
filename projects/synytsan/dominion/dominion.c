@@ -653,6 +653,7 @@ int smithyEffect(int currentPlayer, struct gameState *state, int handPos) {
     }
 
   //discard card from hand
+  //discardCard(handPos, currentPlayer, state, 0);
   discardCard(currentPlayer, handPos, state, 0);
   return 0;
 }
@@ -661,6 +662,7 @@ int adventurerEffect(int currentPlayer, struct gameState *state) {
   int temphand[MAX_HAND];
   int drawntreasure = 0;
   int cardDrawn;
+  //int z = 0;
   int z = 1; // this is the counter for the temp hand
 
   while(drawntreasure<2){
@@ -674,12 +676,12 @@ int adventurerEffect(int currentPlayer, struct gameState *state) {
     else{
       temphand[z]=cardDrawn;
       state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
-      ++z;
+      z++;
     }
   }
   while(z-1>=0){
     state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
-    --z;
+    z=z-1;
   }
   return 0;
 }
