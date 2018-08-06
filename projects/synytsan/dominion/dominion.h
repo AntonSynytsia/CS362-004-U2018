@@ -31,7 +31,7 @@ enum CARD
    feast, /* choice1 is supply # of card gained) */
    gardens,
    mine, /* choice1 is hand# of money to trash, choice2 is supply# of
-	    money to put in hand */
+            money to put in hand */
    remodel, /* choice1 is hand# of card to remodel, choice2 is supply# */
    smithy,
    village,
@@ -79,13 +79,13 @@ struct gameState {
 struct gameState* newGame();
 
 int* kingdomCards(int k1, int k2, int k3, int k4, int k5, int k6, int k7,
-		  int k8, int k9, int k10);
+                  int k8, int k9, int k10);
 
 int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
-		   struct gameState *state);
+                   struct gameState *state);
 /* Responsible for initializing all supplies, and shuffling deck and
    drawing starting hands for all players.  Check that 10 cards selected
-   are in fact (different) kingdom cards, and that numPlayers is valid. 
+   are in fact (different) kingdom cards, and that numPlayers is valid.
 
 Cards not in game should initialize supply position to -1 */
 
@@ -94,7 +94,7 @@ int shuffle(int player, struct gameState *state);
  empty */
 
 int playCard(int handPos, int choice1, int choice2, int choice3,
-	     struct gameState *state);
+             struct gameState *state);
 /* Play card with index handPos from current player's hand */
 
 int buyCard(int supplyPos, struct gameState *state);
