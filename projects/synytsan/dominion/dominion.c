@@ -699,11 +699,12 @@ int councilRoomEffect(int currentPlayer, struct gameState *state, int handPos) {
   state->numBuys++;
 
   //Each other player draws a card
-  for (i = 0; i < state->numPlayers; i++)
+  for (i = 0; i < state->numPlayers; i++) {
     //if ( i != currentPlayer )
     //{
         drawCard(i, state);
     //}
+  }
 
   //put played card in played card pile
   discardCard(handPos, currentPlayer, state, 0);
