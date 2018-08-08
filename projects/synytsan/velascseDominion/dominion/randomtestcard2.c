@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 {
     int num_players, seed;
 
-    int i, j, n, v, coins, council_room_pos, num_council_rooms, num_buys;
+    int i, j, n, coins, council_room_pos, num_council_rooms, num_buys;
     int k1[MAX_PLAYERS];
     int k2[MAX_PLAYERS];
     int k3[MAX_PLAYERS];
@@ -71,11 +71,6 @@ int main(int argc, char *argv[])
         initializeGame(num_players, KINGDOM_CARDS, seed, &gs);
 
         num_council_rooms = 0;
-
-        // Set one of the player's card to be a Council Room
-        v = rand() % num_players;
-        //j = rand() % gs.deckCount[v];
-        //gs.deck[v][j] = council_room;
 
         // Play the game
         while (!isGameOver(&gs)) {
@@ -205,7 +200,7 @@ int main(int argc, char *argv[])
                 }
             }
 
-            if (coins >= 5 && num_council_rooms < MAX_COUNCIL_ROOMS && whoseTurn(&gs) == v) {
+            if (coins >= 5 && num_council_rooms < MAX_COUNCIL_ROOMS) {
                 buyCard(council_room, &gs);
                 ++num_council_rooms;
             }
