@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
     if (num_tests > 0)
         ratio = (float)(num_success) / (float)(num_tests);
 
-    printf("\nCOMPLETE: %d / %d -- (%.2f) tests succeeded!\n\n", num_success, num_tests, ratio * 100.0f);
+    printf("\nCOMPLETE: %d / %d -- (%.2f percent) tests succeeded!\n\n", num_success, num_tests, ratio * 100.0f);
 
     return 0;
 }

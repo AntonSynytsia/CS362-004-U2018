@@ -23,24 +23,28 @@ int main(int argc, char *argv[])
     };
     int seed = 800;
     int i, j, k;
+    char buf[256];
+
     int num_success = 0;
     int num_tests = 0;
-    char buf[256];
+    float ratio = 0.0f;
 
     struct gameState gs;
 
     printf("\n-----------------------------------------------------------------------\n");
-    printf("TESTING councilRoomEffect:");
+    printf("TESTING Council Room Effect:");
     printf("\n-----------------------------------------------------------------------\n");
-
-    // Clear the game state
-    memset(&gs, 0, sizeof(struct gameState));
-
-    // Initialize the game
-    initializeGame(num_players, cards, seed, &gs);
 
     // For every player
     for (i = 0; i < num_players; ++i) {
+        // Clear the game state
+        memset(&gs, 0, sizeof(struct gameState));
+
+        // Initialize the game
+        initializeGame(num_players, cards, seed, &gs);
+
+        gs.whoseTurn = i;
+
         printf("\nPlayer %d has 5 cards in their deck (5 Golds), 1 in hand (Council Room), and 1 in their discard (Village).\n", i + 1);
         gs.deckCount[i] = 5;
         gs.handCount[i] = 1;
@@ -67,41 +71,45 @@ int main(int argc, char *argv[])
         k = gs.numBuys;
 
         printf("After applying Council Room effect to player %d:\n", i + 1);
-        councilRoomEffect(i, &gs, 0);
+        playCard(0, -1, -1, -1, &gs);
 
-        num_success += custom_assert(gs.numBuys, k + 1, "Number of buys should increase by 1.");
-        ++num_tests;
-
-        sprintf(buf, "Player %d deck should have 1 card.", i + 1);
+        sprintf(buf, "Player %d deck should have %d cards (actual %d).", i + 1, 1, gs.deckCount[i]);
         num_success += custom_assert(gs.deckCount[i], 1, buf);
         ++num_tests;
 
-        sprintf(buf, "Player %d hand should have 4 cards.", i + 1);
+        sprintf(buf, "Player %d hand should have %d cards (actual %d).", i + 1, 4, gs.handCount[i]);
         num_success += custom_assert(gs.handCount[i], 4, buf);
         ++num_tests;
 
-        sprintf(buf, "Player %d discard should have 1 card.", i + 1);
+        sprintf(buf, "Player %d discard should have %d card (actual %d).", i + 1, 1, gs.discardCount[i]);
         num_success += custom_assert(gs.discardCount[i], 1, buf);
+        ++num_tests;
+
+        sprintf(buf, "Player %d number of buys should increase by %d - expected: %d, actual: %d", i + 1, 1, k + 1, gs.numBuys);
+        num_success += custom_assert(gs.numBuys, k + 1, buf);
         ++num_tests;
 
         for (j = 0; j < num_players; ++j) {
             if (j != i) {
-                sprintf(buf, "Player %d deck should have 1 card.", j + 1);
+                sprintf(buf, "Player %d deck should have %d cards (actual %d).", j + 1, 1, gs.deckCount[j]);
                 num_success += custom_assert(gs.deckCount[j], 1, buf);
                 ++num_tests;
 
-                sprintf(buf, "Player %d hand should have 1 card.", j + 1);
+                sprintf(buf, "Player %d hand should have %d cards (actual %d).", j + 1, 1, gs.handCount[j]);
                 num_success += custom_assert(gs.handCount[j], 1, buf);
                 ++num_tests;
 
-                sprintf(buf, "Player %d discard should have 0 cards.", j + 1);
+                sprintf(buf, "Player %d discard should have %d card (actual %d).", j + 1, 0, gs.discardCount[j]);
                 num_success += custom_assert(gs.discardCount[j], 0, buf);
                 ++num_tests;
             }
         }
     }
 
-    printf("\nCOMPLETE: %d / %d tests succeeded!\n\n", num_success, num_tests);
+    if (num_tests > 0)
+        ratio = (float)(num_success) / (float)(num_tests);
+
+    printf("\nCOMPLETE: %d / %d -- (%.2f percent) tests succeeded!\n\n", num_success, num_tests, ratio * 100.0f);
 
     return 0;
 }

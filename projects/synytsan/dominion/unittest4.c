@@ -23,9 +23,11 @@ int main(int argc, char *argv[])
     };
     int seed = 800;
     int i, x;
+    char buf[256];
+
     int num_success = 0;
     int num_tests = 0;
-    char buf[256];
+    float ratio = 0.0f;
 
     struct gameState gs;
 
@@ -128,7 +130,10 @@ int main(int argc, char *argv[])
         ++num_tests;
     }
 
-    printf("\nCOMPLETE: %d / %d tests succeeded!\n\n", num_success, num_tests);
+    if (num_tests > 0)
+        ratio = (float)(num_success) / (float)(num_tests);
+
+    printf("\nCOMPLETE: %d / %d -- (%.2f percent) tests succeeded!\n\n", num_success, num_tests, ratio * 100.0f);
 
     return 0;
 }

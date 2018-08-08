@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 {
     int num_players, seed;
 
-    int i, j, n, v, coins, adventurer_pos, num_adventurers;
+    int i, j, n, coins, adventurer_pos, num_adventurers;
     int k1[MAX_PLAYERS];
     int k2[MAX_PLAYERS];
     int k3[MAX_PLAYERS];
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
         num_adventurers = 0;
 
         // Set one of the player's card to be an Adventurer
-        v = rand() % num_players;
+        //v = rand() % num_players;
         //j = rand() % gs.deckCount[v];
         //gs.deck[v][j] = adventurer;
 
@@ -208,7 +208,7 @@ int main(int argc, char *argv[])
                 }
             }
 
-            if (coins >= 6 && num_adventurers < MAX_ADVENTURERS && whoseTurn(&gs) == v) {
+            if (coins >= 6 && num_adventurers < MAX_ADVENTURERS) {
                 buyCard(adventurer, &gs);
                 ++num_adventurers;
             }
@@ -229,7 +229,7 @@ int main(int argc, char *argv[])
     if (num_tests > 0)
         ratio = (float)(num_success) / (float)(num_tests);
 
-    printf("\nCOMPLETE: %d / %d -- (%.2f) tests succeeded!\n\n", num_success, num_tests, ratio * 100.0f);
+    printf("\nCOMPLETE: %d / %d -- (%.2f percent) tests succeeded!\n\n", num_success, num_tests, ratio * 100.0f);
 
     return 0;
 }
