@@ -9,7 +9,12 @@
 
 // Number of times to run random tests for code coverage.
 int NUM_ITERATIONS = 50;
+
+// Maximum number of test cards can be picked during the game.
 int MAX_SMITHIES = 2;
+
+// Maximum number of turns in a test game.
+int MAX_ATTEMPTS = 100;
 
 
 int KINGDOM_CARDS[] = {
@@ -25,6 +30,7 @@ int KINGDOM_CARDS[] = {
     smithy
 };
 
+
 int is_treasure_card(int c) {
     if (c == copper || c == silver || c == gold)
         return 1;
@@ -36,7 +42,7 @@ int main(int argc, char *argv[])
 {
     int num_players, seed;
 
-    int i, j, n, v, coins, smithy_pos, num_smithies;
+    int i, j, n, v, coins, smithy_pos, num_smithies, num_attempts;
     int k1[MAX_PLAYERS];
     int k2[MAX_PLAYERS];
     int k3[MAX_PLAYERS];
@@ -71,14 +77,14 @@ int main(int argc, char *argv[])
         initializeGame(num_players, KINGDOM_CARDS, seed, &gs);
 
         num_smithies = 0;
+        num_attempts = 0;
 
-        // Set one of the player's card to be a Smithy
+        // Chose one of the player's to play Smithy
         v = rand() % num_players;
-        //j = rand() % gs.deckCount[v];
-        //gs.deck[v][j] = smithy;
 
         // Play the game
-        while (!isGameOver(&gs)) {
+        while (!isGameOver(&gs) && num_attempts < MAX_ATTEMPTS) {
+            ++num_attempts;
             coins = 0;
             smithy_pos = -1;
 
@@ -152,7 +158,7 @@ int main(int argc, char *argv[])
                 num_success += custom_assert(gs.handCount[i], e2[i], buf);
                 ++num_tests;
 
-                sprintf(buf, "Player %d discard should have %d card (actual %d).", i + 1, e3[i], gs.discardCount[i]);
+                sprintf(buf, "Player %d discard should have %d cards (actual %d).", i + 1, e3[i], gs.discardCount[i]);
                 num_success += custom_assert(gs.discardCount[i], e3[i], buf);
                 ++num_tests;
 
@@ -166,7 +172,7 @@ int main(int argc, char *argv[])
                         num_success += custom_assert(gs.handCount[j], e2[j], buf);
                         ++num_tests;
 
-                        sprintf(buf, "Player %d discard should have %d card (actual %d).", j + 1, e3[j], gs.discardCount[j]);
+                        sprintf(buf, "Player %d discard should have %d cards (actual %d).", j + 1, e3[j], gs.discardCount[j]);
                         num_success += custom_assert(gs.discardCount[j], e3[j], buf);
                         ++num_tests;
                     }

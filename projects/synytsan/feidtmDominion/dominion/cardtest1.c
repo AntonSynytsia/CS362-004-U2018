@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
         num_success += custom_assert(gs.handCount[i], 1, buf);
         ++num_tests;
 
-        sprintf(buf, "Player %d discard should have %d card (actual %d).", i + 1, 0, gs.discardCount[i]);
+        sprintf(buf, "Player %d discard should have %d cards (actual %d).", i + 1, 0, gs.discardCount[i]);
         num_success += custom_assert(gs.discardCount[i], 0, buf);
         ++num_tests;
     }
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
         num_success += custom_assert(gs.handCount[i], 4, buf);
         ++num_tests;
 
-        sprintf(buf, "Player %d discard should have %d card (actual %d).", i + 1, 0, gs.discardCount[i]);
+        sprintf(buf, "Player %d discard should have %d cards (actual %d).", i + 1, 0, gs.discardCount[i]);
         num_success += custom_assert(gs.discardCount[i], 0, buf);
         ++num_tests;
     }
