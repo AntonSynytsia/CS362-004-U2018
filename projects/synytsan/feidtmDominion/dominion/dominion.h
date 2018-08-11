@@ -128,10 +128,14 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 /* Set array position of each player who won (remember ties!) to
    1, others to 0 */
 
-int smithy_func(int handPos, struct gameState* state);
-int adventurer_func(int handPos, struct gameState* state);
-int village_func(int handPos, struct gameState* state);
-int outpst_func(int handPos, struct gameState* state);
-int seaHag_func(int handPos, struct gameState* state);
+int adventurerEffect(struct gameState *state);
+
+int gardensEffect();
+
+int minionEffect(int choice1, int choice2, struct gameState *state, int handPos);
+
+int remodelEffect(int choice1, int choice2, struct gameState *state, int handPos);
+
+int smithyEffect(struct gameState *state, int handPos);
 
 #endif
