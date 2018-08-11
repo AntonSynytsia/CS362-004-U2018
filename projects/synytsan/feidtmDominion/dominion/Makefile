@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -fpic -coverage -lm -std=c99 -g -DNDEBUG
+CFLAGS = -Wall -fpic -coverage -lm -std=c99 -g
 DEPS = rngs.h dominion.h test_helpers.h
 OBJ = rngs.o dominion.o test_helpers.o
 
