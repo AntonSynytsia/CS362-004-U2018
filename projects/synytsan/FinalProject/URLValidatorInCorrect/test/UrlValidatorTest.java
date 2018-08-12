@@ -1,5 +1,3 @@
-
-
 import junit.framework.TestCase;
 
 //You can use this as a skeleton for your 3 different test approach
@@ -21,11 +19,23 @@ public class UrlValidatorTest extends TestCase {
    
    public void testManualTest()
    {
-//You can use this function to implement your manual testing	   
-	   
+	   UrlValidator urlVal = new UrlValidator();
+	   assertTrue(urlVal.isValid("http://www.hello.com"));
+	   assertTrue(urlVal.isValid("http://www.hello.com/"));
+	   assertTrue(urlVal.isValid("http://www.h.e.l.l.o.com/"));
+	   assertTrue(urlVal.isValid("http://www.hello.com/world"));
+	   assertTrue(urlVal.isValid("http://русскоерадио.рф"));
+	   assertTrue(urlVal.isValid("https://русскоерадио.рф"));
+	   assertFalse(urlVal.isValid("http://www.hello/world/.com"));
+	   assertFalse(urlVal.isValid("http://www..hello.com/"));
+	   assertFalse(urlVal.isValid("http://www.hel lo.com/"));
+	   assertFalse(urlVal.isValid("http:// www.hello.com"));
+	   assertFalse(urlVal.isValid("http:// www.hello.com"));
+	   assertFalse(urlVal.isValid("http:// www.hello.world"));
    }
    
    
+    
    public void testYourFirstPartition()
    {
 	 //You can use this function to implement your First Partition testing	   

@@ -48,7 +48,25 @@ protected void setUp() {
 //    
 //        testIsValid(testUrlPartsOptions, options);
    }
-
+   
+   public void testManualTest()
+   {
+	   UrlValidator urlVal = new UrlValidator();
+	   assertTrue(urlVal.isValid("http://www.hello.com"));
+	   assertTrue(urlVal.isValid("http://www.hello.com/"));
+	   assertTrue(urlVal.isValid("http://www.h.e.l.l.o.com/"));
+	   assertTrue(urlVal.isValid("http://www.hello.com/world"));
+	   assertTrue(urlVal.isValid("http://русскоерадио.рф"));
+	   assertTrue(urlVal.isValid("https://русскоерадио.рф"));
+	   assertFalse(urlVal.isValid("http://www.hello/world/.com"));
+	   assertFalse(urlVal.isValid("http://www..hello.com/"));
+	   assertFalse(urlVal.isValid("http://www.hel lo.com/"));
+	   assertFalse(urlVal.isValid("http:// www.hello.com"));
+	   assertFalse(urlVal.isValid("http:// www.hello.com"));
+	   assertFalse(urlVal.isValid("http:// www.hello.world"));
+   }
+   
+   
    public void testIsValidScheme() {
       if (printStatus) {
          System.out.print("\n testIsValidScheme() ");
@@ -85,6 +103,7 @@ protected void setUp() {
 	      //UrlValidator urlVal = new UrlValidator(null, allowAllSchemes);
       assertTrue(urlVal.isValid("http://www.google.com"));
       assertTrue(urlVal.isValid("http://www.google.com/"));
+      
       int statusPerLine = 60;
       int printed = 0;
       if (printIndex)  {
