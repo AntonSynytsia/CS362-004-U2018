@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+import java.util.Random;
+
 import junit.framework.TestCase;
 
 /**
@@ -49,24 +51,40 @@ protected void setUp() {
 //        testIsValid(testUrlPartsOptions, options);
    }
    
-   public void testManualTest()
+   public void testManualTest2()
    {
 	   UrlValidator urlVal = new UrlValidator();
+	   assertTrue(urlVal.isValid("HTTP://www.hello.com"));
+	   assertTrue(urlVal.isValid("HTTPS://www.hello.com"));
+
 	   assertTrue(urlVal.isValid("http://www.hello.com"));
-	   assertTrue(urlVal.isValid("http://www.hello.com/"));
-	   assertTrue(urlVal.isValid("http://www.h.e.l.l.o.com/"));
-	   assertTrue(urlVal.isValid("http://www.hello.com/world"));
-	   assertTrue(urlVal.isValid("http://русскоерадио.рф"));
-	   assertTrue(urlVal.isValid("https://русскоерадио.рф"));
-	   assertFalse(urlVal.isValid("http://www.hello/world/.com"));
-	   assertFalse(urlVal.isValid("http://www..hello.com/"));
-	   assertFalse(urlVal.isValid("http://www.hel lo.com/"));
-	   assertFalse(urlVal.isValid("http:// www.hello.com"));
-	   assertFalse(urlVal.isValid("http:// www.hello.com"));
-	   assertFalse(urlVal.isValid("http:// www.hello.world"));
+	   assertTrue(urlVal.isValid("http://www.hello.com"));
+	   
+	   
+   	   assertTrue(urlVal.isValid("http://www.hello.com/"));
+	   assertTrue(urlVal.isValid("http://www.google.com/test1?action=view"));
+	   assertTrue(urlVal.isValid("https://hello.com"));
+	   assertTrue(urlVal.isValid("https://hello.ru"));
+   	   assertTrue(urlVal.isValid("http://www.hello.su"));
+   	   assertTrue(urlVal.isValid("http://www.h.e.l.l.o.com/"));
+   	   assertTrue(urlVal.isValid("http://www.helloworld.com/"));
+   	   assertTrue(urlVal.isValid("http://www.hello.world.com/"));
+   	   assertTrue(urlVal.isValid("http://www.hello.com/world"));
+   	   assertTrue(urlVal.isValid("http://русскоерадио.рф"));
+   	   assertTrue(urlVal.isValid("https://русскоерадио.рф"));
+   	   assertTrue(urlVal.isValid("http://www.hello.world"));
+   	   assertTrue(urlVal.isValid("http://www.hello.com.world"));
+   	   assertFalse(urlVal.isValid("http://www.hello/world/.com"));
+   	   assertFalse(urlVal.isValid("http://www..hello.com/"));
+   	   assertFalse(urlVal.isValid("http://www.hel lo.com/"));
+   	   assertFalse(urlVal.isValid("http:// www.hello.com"));
+   	   assertFalse(urlVal.isValid("http://www.hello.com world"));
+   	   assertFalse(urlVal.isValid("http://.com"));
+   	   assertFalse(urlVal.isValid("http://world.hello"));
+   	   assertFalse(urlVal.isValid("http://world.hello:80/$1234?action=2"));
+   	   assertTrue(urlVal.isValid("http://world.com:0/test1?action=edit&mode=up"));
    }
-   
-   
+      
    public void testIsValidScheme() {
       if (printStatus) {
          System.out.print("\n testIsValidScheme() ");

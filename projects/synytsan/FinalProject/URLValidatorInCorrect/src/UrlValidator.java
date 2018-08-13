@@ -279,7 +279,7 @@ public class UrlValidator implements Serializable {
             }
             allowedSchemes = new HashSet<String>(schemes.length);
             for(int i=0; i < schemes.length; i++) {
-                allowedSchemes.add(schemes[i].toUpperCase(Locale.ENGLISH));
+                allowedSchemes.add(schemes[i].toLowerCase(Locale.ENGLISH));
 
             }
         }
@@ -363,7 +363,7 @@ public class UrlValidator implements Serializable {
             return false;
         }
 
-        if (isOff(ALLOW_ALL_SCHEMES) && !allowedSchemes.contains(scheme.toLowerCase(Locale.ENGLISH))) {
+        if (isOff(ALLOW_ALL_SCHEMES) && !allowedSchemes.contains(scheme.toUpperCase(Locale.ENGLISH))) {
             return false;
         }
 
